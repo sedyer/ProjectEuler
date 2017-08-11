@@ -1,18 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace ProjectEuler
+﻿namespace ProjectEuler
 {
     class Program
     {
         static void Main(string[] args)
         {
+            long result = Methods.LargestPrimeFactor(600851475143);
         }
 
-        static int SumOfFactorsFinder(List<int> factors, int stopValue)
-        {
-            int sum = 0;
-
-            return sum;
-        }
     }
 }
