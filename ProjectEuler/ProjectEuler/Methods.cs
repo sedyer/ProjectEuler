@@ -42,29 +42,71 @@
             return sum;
         }
 
-        public static long LargestPrimeFactor (long value)
+        public static long LargestFactor(long value)
         {
-            long result = value;
-
-            for (long i = value - 2; i > 0; i -= 2)
+            for (long i = 2; i < value; i++)
             {
-                bool isPrime = true;
-
-                for (int j = 3; j < i; j++)
+                if (value % i == 0)
                 {
-                    if (i % j == 0)
-                    {
-                        //not prime
-
-                        isPrime = false;
-                    }
-                              
+                    return value / i;
                 }
-
-                if (isPrime) break;  
             }
 
-            return result;
+            return -1;
+        }
+
+        public static bool isPrime(long value)
+        {
+            for (long i = 2; i <= value / 2; i++)
+            {
+                if (value % i == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static long LargestPrimeFactor(long value)
+        {
+            for (long i = 2; i < value; i++)
+            {
+                if (value % i == 0 && isPrime(value / i))
+                {
+                    return value / i;
+                }
+            }
+
+            return -1;
+        }
+
+        public static bool isPalindrome(int value)
+        {
+            return false;
+        }
+
+        public static int numberReverser(int value)
+        {
+            int val = value;
+            string reverse = "";
+
+            while (val > 10)
+            {
+                int temp = val % 10;
+
+                reverse = reverse + temp.ToString();
+            }
+
+            return 0;
+        }
+
+        public static int largestPalindromeProduct()
+        {
+
+
+
+            return -1;
         }
     }
 }
