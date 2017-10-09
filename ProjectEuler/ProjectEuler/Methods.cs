@@ -1,4 +1,6 @@
-﻿namespace ProjectEuler
+﻿using System;
+
+namespace ProjectEuler
 {
     public class Methods
     {
@@ -83,30 +85,43 @@
 
         public static bool isPalindrome(int value)
         {
-            return false;
-        }
-
-        public static int numberReverser(int value)
-        {
-            int val = value;
-            string reverse = "";
-
-            while (val > 10)
-            {
-                int temp = val % 10;
-
-                reverse = reverse + temp.ToString();
-            }
-
-            return 0;
+            return value == valueReverser(value);
         }
 
         public static int largestPalindromeProduct()
         {
+            int maxProduct = -1;
+
+            for (int i = 999; i > 99; i--)
+            {
+                for (int j = i; j > 99; j--)
+                {
+                    int product = i * j;
+
+                    if (isPalindrome(product) && (product > maxProduct))
+                    {
+                        maxProduct = product;
+                    }
+                }
+            }
+
+            return maxProduct;
+        }
 
 
+        public static int valueReverser(int value)
+        {
+            int val = value;
 
-            return -1;
+            string backwards = "";
+
+            while (val > 0)
+            {
+                backwards = backwards + (val % 10).ToString();
+                val = val / 10;
+            }
+
+            return Convert.ToInt32(backwards);
         }
     }
 }

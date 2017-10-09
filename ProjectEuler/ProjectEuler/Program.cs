@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            long result = Methods.LargestPrimeFactor(600851475143);
+            var palindrome = Methods.largestPalindromeProduct();
         }
 
     }
