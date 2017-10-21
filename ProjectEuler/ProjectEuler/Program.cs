@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var palindrome = Methods.largestPalindromeProduct();
+            var result = Methods.SmallestNumberDivisibleByAllUpTo(20);
         }
 
     }

@@ -57,7 +57,7 @@ namespace ProjectEuler
             return -1;
         }
 
-        public static bool isPrime(long value)
+        public static bool IsPrime(long value)
         {
             for (long i = 2; i <= value / 2; i++)
             {
@@ -74,7 +74,7 @@ namespace ProjectEuler
         {
             for (long i = 2; i < value; i++)
             {
-                if (value % i == 0 && isPrime(value / i))
+                if (value % i == 0 && IsPrime(value / i))
                 {
                     return value / i;
                 }
@@ -83,12 +83,12 @@ namespace ProjectEuler
             return -1;
         }
 
-        public static bool isPalindrome(int value)
+        public static bool IsPalindrome(int value)
         {
-            return value == valueReverser(value);
+            return value == ValueReverser(value);
         }
 
-        public static int largestPalindromeProduct()
+        public static int LargestPalindromeProduct()
         {
             int maxProduct = -1;
 
@@ -98,7 +98,7 @@ namespace ProjectEuler
                 {
                     int product = i * j;
 
-                    if (isPalindrome(product) && (product > maxProduct))
+                    if (IsPalindrome(product) && (product > maxProduct))
                     {
                         maxProduct = product;
                     }
@@ -109,7 +109,7 @@ namespace ProjectEuler
         }
 
 
-        public static int valueReverser(int value)
+        public static int ValueReverser(int value)
         {
             int val = value;
 
@@ -122,6 +122,26 @@ namespace ProjectEuler
             }
 
             return Convert.ToInt32(backwards);
+        }
+
+        public static int SmallestNumberDivisibleByAllUpTo(int value)
+        {
+            int num = value;
+
+            while (true)
+            {
+                for (int i = value; i > 1; i--)
+                {
+                    if (num % i != 0)
+                    {
+                        break;
+                    }
+
+                    if (i == 2) return num;
+                }
+
+                num += value;
+            }
         }
     }
 }
