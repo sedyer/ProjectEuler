@@ -21,4 +21,23 @@ function getNthPrime(num)
     }
 }
 
-console.log(getNthPrime(10001))
+function getLargestSubstringProduct(string, length) 
+{
+    var largestProduct = 0
+
+    for (var i = 0; i <= string.length - length; i++) 
+    {
+        var substring = string.substring(i, i + length).split("")
+
+        var product = substring.reduce((x,y) => parseInt(x) * parseInt(y))
+
+        if (product > largestProduct)
+        {
+            largestProduct = product
+        }
+    }
+
+    return largestProduct
+}
+
+console.log(getLargestSubstringProduct(bigString, 13))
