@@ -6,6 +6,5 @@
         {
             var result = Methods.SmallestNumberDivisibleByAllUpTo(20);
         }
-
     }
 }

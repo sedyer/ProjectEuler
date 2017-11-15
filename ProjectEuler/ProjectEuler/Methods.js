@@ -40,4 +40,4 @@ function getLargestSubstringProduct(string, length)
     return largestProduct
 }
 
-console.log(getLargestSubstringProduct(bigString, 13))
+console.log("test")
