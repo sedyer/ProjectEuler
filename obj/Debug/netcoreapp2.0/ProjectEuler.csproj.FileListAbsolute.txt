@@ -1,0 +1,10 @@
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\bin\Debug\netcoreapp2.0\ProjectEuler.deps.json
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\bin\Debug\netcoreapp2.0\ProjectEuler.runtimeconfig.json
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\bin\Debug\netcoreapp2.0\ProjectEuler.runtimeconfig.dev.json
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\bin\Debug\netcoreapp2.0\ProjectEuler.dll
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\bin\Debug\netcoreapp2.0\ProjectEuler.pdb
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\obj\Debug\netcoreapp2.0\ProjectEuler.csproj.CoreCompileInputs.cache
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\obj\Debug\netcoreapp2.0\ProjectEuler.AssemblyInfoInputs.cache
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\obj\Debug\netcoreapp2.0\ProjectEuler.AssemblyInfo.cs
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\obj\Debug\netcoreapp2.0\ProjectEuler.dll
+C:\Users\SHANE.DYER\Source\Repos\ProjectEuler\obj\Debug\netcoreapp2.0\ProjectEuler.pdb

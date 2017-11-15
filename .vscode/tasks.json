@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/ProjectEuler.csproj"
+                "${workspaceFolder}/cs/ProjectEuler.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
