@@ -1,3 +1,3 @@
 var methods = require('./Methods');
 
-console.log(methods.isPrime(27)); 
+var result = methods.findPythagoreanTripletWithGivenSum(1000);
