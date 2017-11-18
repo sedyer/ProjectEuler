@@ -64,7 +64,7 @@ getUniqueElements = (array) ->
 	tmp = []
 
 	array.filter((x) ->
-	
+
 		if (tmp.indexOf(x.toString()) < 0)
 
 			tmp.push(x.toString())
@@ -73,4 +73,3 @@ getUniqueElements = (array) ->
 
 
 module.exports = { findPythagoreanTripletWithGivenSum: findPythagoreanTripletWithGivenSum }
-
