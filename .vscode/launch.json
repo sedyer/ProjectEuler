@@ -8,7 +8,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "JavaScript Launch",
+            "name": "JavaScript",
             "program": "${workspaceFolder}/js/app"
         },
 
