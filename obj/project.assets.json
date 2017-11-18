@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\ProjectEuler.csproj",
+      "projectUniqueName": "c:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\ProjectEuler.csproj",
       "projectName": "ProjectEuler",
-      "projectPath": "C:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\ProjectEuler.csproj",
+      "projectPath": "c:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\ProjectEuler.csproj",
       "packagesPath": "C:\\Users\\SHANE.DYER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\obj\\",
+      "outputPath": "c:\\Users\\SHANE.DYER\\Source\\Repos\\ProjectEuler\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,3 +1,3 @@
-var methods = require('./Methods');
+var methods = require('../coffee/cMethods');
 
 var result = methods.findPythagoreanTripletWithGivenSum(12);
