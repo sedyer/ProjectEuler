@@ -52,15 +52,13 @@ isPrime = (num) ->
 	if (num % 2 == 0)
 		return false
 
-	vals = Array.from(new Array(Math.ceil(Math.sqrt(num))), (x, i) -> i + 2)
-
-	return vals.every((x) -> num % x != 0)
+	return [2..Math.ceil(Math.sqrt(num))].every((x) -> num % x != 0)
 
 sumAllPrimesUnderValue = (num) ->
 
-	Array.from(new Array(num), (x, i) -> i + 1)
+	[2..num]
 	.filter((x) -> isPrime(x))
-	.reduce((x, y) -> x + y) - 1
+	.reduce((x, y) -> x + y)
 
 
 comparator = (x, y) ->
