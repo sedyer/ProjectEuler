@@ -1,5 +1,5 @@
 var methods = require('../coffee/cMethods');
 
-var result = methods.findPythagoreanTripletWithGivenSum(1000);
+var result = methods.sumAllPrimesUnderValue(2000000);
 
 console.log(result);

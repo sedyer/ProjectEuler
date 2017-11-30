@@ -44,6 +44,25 @@ getAllFactorPairs = (num) ->
 	Array.from(new Array(num), (x, i) -> i + 1).filter((x) -> num % x == 0).map((x) -> [x, num / x])
 
 
+isPrime = (num) ->
+
+	if (num <= 3)
+		return true
+
+	if (num % 2 == 0)
+		return false
+
+	vals = Array.from(new Array(Math.ceil(Math.sqrt(num))), (x, i) -> i + 2)
+
+	return vals.every((x) -> num % x != 0)
+
+sumAllPrimesUnderValue = (num) ->
+
+	Array.from(new Array(num), (x, i) -> i + 1)
+	.filter((x) -> isPrime(x))
+	.reduce((x, y) -> x + y) - 1
+
+
 comparator = (x, y) ->
 
 	if x[0] == y[0]
@@ -72,4 +91,7 @@ getUniqueElements = (array) ->
 		)
 
 
-module.exports = { findPythagoreanTripletWithGivenSum: findPythagoreanTripletWithGivenSum }
+module.exports = {
+	findPythagoreanTripletWithGivenSum: findPythagoreanTripletWithGivenSum,
+	sumAllPrimesUnderValue: sumAllPrimesUnderValue
+	}
