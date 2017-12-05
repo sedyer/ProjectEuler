@@ -40,6 +40,7 @@ class GameOfLife
     xPos: x
     yPos: y
     radius: r
+    alive: true
   
   createSeedCircle: ->
     @createCircle(this.canvas.width * Math.random(), this.canvas.height * Math.random(), 3)
@@ -53,6 +54,7 @@ class GameOfLife
 
   draw: ->
     for node in @nodeArray
+      if node.alive is true
         @drawCircle node
 
   getDistance = (a, b) ->
@@ -91,35 +93,36 @@ class GameOfLife
     newArray = @nodeArray
 
     for node in @nodeArray
-        if typeof node != 'undefined' and node != null
 
-            neighborCount = countNeighbors(node, @nodeArray, @adjacentDistance)
+      neighborCount = countNeighbors(node, @nodeArray, @adjacentDistance)
 
-            if neighborCount is 1
-                @reproduce(node, newArray)
+      if neighborCount is 1
+        @reproduce(node, newArray)
     
     @nodeArray = newArray
 
   cull: ->
 
     newArray = @nodeArray
-    index = @nodeArray.length
 
-    while (index--)
+    for node in newArray
 
-        if newArray.length >= index
+      neighborCount = countNeighbors(node, newArray, @adjacentDistance)
 
-            neighborCount = countNeighbors(newArray[index], newArray, @adjacentDistance)
+      if neighborCount is 0
+        if Math.random() < 0.10
+          node.alive = false
 
-            if neighborCount is 0
-                if Math.random() < 0.10
-                    newArray.splice(index, 1)
-                    index--
-                    continue
+      if neighborCount > 2
+          node.alive = false
 
-            if neighborCount > 2
-                newArray.splice(index, 1)
-                index--
+    index = newArray.length - 1
+
+    while (index >= 0)
+      if newArray[index].alive is false
+        newArray.splice(index, 1)
+        index--
+      index--
 
     @nodeArray = newArray
 
@@ -127,6 +130,13 @@ class GameOfLife
 
     newX = (0.5 * Math.random()) * @adjacentDistance * 10 + node.xPos
     newY = (0.5 * Math.random()) * @adjacentDistance * 10 + node.yPos
+
+    if newX > this.canvas.width
+      newX = this.canvas.width
+
+    if newY > this.canvas.height
+      newY = this.canvas.height
+
     newCircle = @createCircle(newX, newY, node.radius)
     array.push newCircle
 

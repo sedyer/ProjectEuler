@@ -43,7 +43,8 @@
         return {
           xPos: x,
           yPos: y,
-          radius: r
+          radius: r,
+          alive: true
         };
       }
 
@@ -67,7 +68,11 @@
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           node = ref[i];
-          results.push(this.drawCircle(node));
+          if (node.alive === true) {
+            results.push(this.drawCircle(node));
+          } else {
+            results.push(void 0);
+          }
         }
         return results;
       }
@@ -86,35 +91,36 @@
         ref = this.nodeArray;
         for (i = 0, len = ref.length; i < len; i++) {
           node = ref[i];
-          if (typeof node !== 'undefined' && node !== null) {
-            neighborCount = countNeighbors(node, this.nodeArray, this.adjacentDistance);
-            if (neighborCount === 1) {
-              this.reproduce(node, newArray);
-            }
+          neighborCount = countNeighbors(node, this.nodeArray, this.adjacentDistance);
+          if (neighborCount === 1) {
+            this.reproduce(node, newArray);
           }
         }
         return this.nodeArray = newArray;
       }
 
       cull() {
-        var index, neighborCount, newArray;
+        var i, index, len, neighborCount, newArray, node;
         newArray = this.nodeArray;
-        index = this.nodeArray.length;
-        while (index--) {
-          if (newArray.length >= index) {
-            neighborCount = countNeighbors(newArray[index], newArray, this.adjacentDistance);
-            if (neighborCount === 0) {
-              if (Math.random() < 0.10) {
-                newArray.splice(index, 1);
-                index--;
-                continue;
-              }
-            }
-            if (neighborCount > 2) {
-              newArray.splice(index, 1);
-              index--;
+        for (i = 0, len = newArray.length; i < len; i++) {
+          node = newArray[i];
+          neighborCount = countNeighbors(node, newArray, this.adjacentDistance);
+          if (neighborCount === 0) {
+            if (Math.random() < 0.10) {
+              node.alive = false;
             }
           }
+          if (neighborCount > 2) {
+            node.alive = false;
+          }
+        }
+        index = newArray.length - 1;
+        while (index >= 0) {
+          if (newArray[index].alive === false) {
+            newArray.splice(index, 1);
+            index--;
+          }
+          index--;
         }
         return this.nodeArray = newArray;
       }
@@ -123,6 +129,12 @@
         var newCircle, newX, newY;
         newX = (0.5 * Math.random()) * this.adjacentDistance * 10 + node.xPos;
         newY = (0.5 * Math.random()) * this.adjacentDistance * 10 + node.yPos;
+        if (newX > this.canvas.width) {
+          newX = this.canvas.width;
+        }
+        if (newY > this.canvas.height) {
+          newY = this.canvas.height;
+        }
         newCircle = this.createCircle(newX, newY, node.radius);
         return array.push(newCircle);
       }
