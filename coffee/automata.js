@@ -3,40 +3,49 @@
   var GameOfLife;
 
   GameOfLife = (function() {
-    var countNeighbors, getDistance;
+    var countNeighbors, getDistance, getNeighbors;
 
     class GameOfLife {
       constructor() {
         this.tick = this.tick.bind(this);
         this.createCanvas();
-        this.resizeCanvas();
-        this.createDrawingContext();
         this.seed();
         this.tick();
       }
 
       createCanvas() {
         this.canvas = document.createElement('canvas');
-        return document.body.appendChild(this.canvas);
-      }
-
-      resizeCanvas() {
-        this.canvas.height = 700;
-        return this.canvas.width = 700;
-      }
-
-      createDrawingContext() {
+        document.body.appendChild(this.canvas);
+        this.canvas.height = this.canvasheight;
+        this.canvas.width = this.canvaswidth;
         return this.drawingContext = this.canvas.getContext('2d');
       }
 
       drawCircle(circle) {
         this.drawingContext.lineWidth = 2;
         this.drawingContext.strokeStyle = 'rgba(242, 198, 65, 0.1)';
-        this.drawingContext.fillStyle = 'rgb(242, 198, 65)';
+        this.drawingContext.fillStyle = 'white';
         this.drawingContext.beginPath();
         this.drawingContext.arc(circle.xPos, circle.yPos, circle.radius, 0, 2 * Math.PI, false);
         this.drawingContext.fill();
         return this.drawingContext.stroke();
+      }
+
+      drawConnections(node, array, distance) {
+        var context, i, len, neighbors, results, x;
+        neighbors = getNeighbors(node, array, distance);
+        context = this.drawingContext;
+        context.lineWidth = 2;
+        context.strokeStyle = 'rgb(242, 198, 65)';
+        results = [];
+        for (i = 0, len = neighbors.length; i < len; i++) {
+          x = neighbors[i];
+          context.beginPath();
+          context.moveTo(node.xPos, node.yPos);
+          context.lineTo(x.xPos, x.yPos);
+          results.push(context.stroke());
+        }
+        return results;
       }
 
       createCircle(x, y, r) {
@@ -49,7 +58,7 @@
       }
 
       createSeedCircle() {
-        return this.createCircle(this.canvas.width * Math.random(), this.canvas.height * Math.random(), 3);
+        return this.createCircle(this.canvas.width * Math.random(), this.canvas.height * Math.random(), 2);
       }
 
       seed() {
@@ -63,11 +72,18 @@
       }
 
       draw() {
-        var i, len, node, ref, results;
+        var i, j, len, len1, node, ref, ref1, results;
         ref = this.nodeArray;
-        results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           node = ref[i];
+          if (node.alive === true) {
+            this.drawConnections(node, this.nodeArray, this.adjacentDistance);
+          }
+        }
+        ref1 = this.nodeArray;
+        results = [];
+        for (j = 0, len1 = ref1.length; j < len1; j++) {
+          node = ref1[j];
           if (node.alive === true) {
             results.push(this.drawCircle(node));
           } else {
@@ -106,12 +122,14 @@
           node = newArray[i];
           neighborCount = countNeighbors(node, newArray, this.adjacentDistance);
           if (neighborCount === 1) {
-            if (Math.random() < 0.10) {
+            if (Math.random() < 0.50) {
               node.alive = false;
             }
           }
           if (neighborCount > 3) {
-            node.alive = false;
+            if (Math.random() < 0.50) {
+              node.alive = false;
+            }
           }
         }
         index = newArray.length - 1;
@@ -143,11 +161,11 @@
 
     GameOfLife.prototype.nodeArray = null;
 
-    GameOfLife.prototype.canvasheight = 700;
+    GameOfLife.prototype.canvasheight = 400;
 
-    GameOfLife.prototype.canvaswidth = 700;
+    GameOfLife.prototype.canvaswidth = 400;
 
-    GameOfLife.prototype.initialnodes = 50;
+    GameOfLife.prototype.initialnodes = 500;
 
     GameOfLife.prototype.adjacentDistance = 20;
 
@@ -163,6 +181,19 @@
       ydiff = b.yPos - a.yPos;
       sumOfSquares = Math.pow(xdiff, 2) + Math.pow(ydiff, 2);
       return Math.sqrt(sumOfSquares);
+    };
+
+    getNeighbors = function(node, array, distance) {
+      var d, i, len, neighbors, x;
+      neighbors = [];
+      for (i = 0, len = array.length; i < len; i++) {
+        x = array[i];
+        d = getDistance(node, x);
+        if (d < distance) {
+          neighbors.push(x);
+        }
+      }
+      return neighbors;
     };
 
     countNeighbors = function(node, array, distance) {

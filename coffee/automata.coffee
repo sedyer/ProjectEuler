@@ -1,8 +1,8 @@
 class GameOfLife
   nodeArray: null
-  canvasheight: 700
-  canvaswidth: 700
-  initialnodes: 50
+  canvasheight: 400
+  canvaswidth: 400
+  initialnodes: 500
   adjacentDistance: 20
   tickLength: 100
   canvas: null
@@ -10,31 +10,38 @@ class GameOfLife
 
   constructor: ->
     @createCanvas()
-    @resizeCanvas()
-    @createDrawingContext()
     @seed()
     @tick()
 
   createCanvas: ->
     @canvas = document.createElement 'canvas'
     document.body.appendChild @canvas
-
-  resizeCanvas: ->
-    @canvas.height = 700
-    @canvas.width = 700
-
-  createDrawingContext: ->
+    @canvas.height = @canvasheight
+    @canvas.width = @canvaswidth
     @drawingContext = @canvas.getContext '2d'
 
   drawCircle: (circle) ->
 
     @drawingContext.lineWidth = 2
     @drawingContext.strokeStyle = 'rgba(242, 198, 65, 0.1)'
-    @drawingContext.fillStyle = 'rgb(242, 198, 65)'
+    @drawingContext.fillStyle = 'white'
     @drawingContext.beginPath()
     @drawingContext.arc(circle.xPos, circle.yPos, circle.radius, 0, 2 * Math.PI, false)
     @drawingContext.fill()
     @drawingContext.stroke()
+
+  drawConnections: (node, array, distance) ->
+
+    neighbors = getNeighbors(node, array, distance)
+    context = @drawingContext
+    context.lineWidth = 2
+    context.strokeStyle = 'rgb(242, 198, 65)'
+
+    for x in neighbors
+      context.beginPath()
+      context.moveTo(node.xPos, node.yPos)
+      context.lineTo(x.xPos, x.yPos)
+      context.stroke()
 
   createCircle: (x, y, r) ->
     xPos: x
@@ -43,7 +50,7 @@ class GameOfLife
     alive: true
   
   createSeedCircle: ->
-    @createCircle(this.canvas.width * Math.random(), this.canvas.height * Math.random(), 3)
+    @createCircle(this.canvas.width * Math.random(), this.canvas.height * Math.random(), 2)
 
   seed: ->
     @nodeArray = []
@@ -55,6 +62,10 @@ class GameOfLife
   draw: ->
     for node in @nodeArray
       if node.alive is true
+        @drawConnections(node, @nodeArray, @adjacentDistance)
+
+    for node in @nodeArray
+      if node.alive is true
         @drawCircle node
 
   getDistance = (a, b) ->
@@ -64,6 +75,20 @@ class GameOfLife
     sumOfSquares = Math.pow(xdiff, 2) + Math.pow(ydiff, 2)
 
     return Math.sqrt(sumOfSquares)
+
+  getNeighbors = (node, array, distance) ->
+
+    neighbors = []
+
+    for x in array
+
+        d = getDistance(node, x)
+
+        if d < distance
+            neighbors.push x
+
+    return neighbors
+
 
   countNeighbors = (node, array, distance) ->
     
@@ -110,10 +135,11 @@ class GameOfLife
       neighborCount = countNeighbors(node, newArray, @adjacentDistance)
 
       if neighborCount is 1
-        if Math.random() < 0.10
+        if Math.random() < 0.50
           node.alive = false
 
       if neighborCount > 3
+        if Math.random() < 0.50
           node.alive = false
 
     index = newArray.length - 1
