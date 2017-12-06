@@ -92,7 +92,7 @@
         for (i = 0, len = ref.length; i < len; i++) {
           node = ref[i];
           neighborCount = countNeighbors(node, this.nodeArray, this.adjacentDistance);
-          if (neighborCount === 1) {
+          if (neighborCount === 2) {
             this.reproduce(node, newArray);
           }
         }
@@ -105,12 +105,12 @@
         for (i = 0, len = newArray.length; i < len; i++) {
           node = newArray[i];
           neighborCount = countNeighbors(node, newArray, this.adjacentDistance);
-          if (neighborCount === 0) {
+          if (neighborCount === 1) {
             if (Math.random() < 0.10) {
               node.alive = false;
             }
           }
-          if (neighborCount > 2) {
+          if (neighborCount > 3) {
             node.alive = false;
           }
         }
@@ -171,7 +171,7 @@
       for (i = 0, len = array.length; i < len; i++) {
         x = array[i];
         d = getDistance(node, x);
-        if (d < distance && d > 0) {
+        if (d < distance) {
           count++;
         }
       }

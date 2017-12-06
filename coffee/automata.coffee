@@ -73,7 +73,7 @@ class GameOfLife
 
         d = getDistance(node, x)
 
-        if d < distance and d > 0
+        if d < distance
             count++
 
     return count
@@ -96,7 +96,7 @@ class GameOfLife
 
       neighborCount = countNeighbors(node, @nodeArray, @adjacentDistance)
 
-      if neighborCount is 1
+      if neighborCount is 2
         @reproduce(node, newArray)
     
     @nodeArray = newArray
@@ -109,11 +109,11 @@ class GameOfLife
 
       neighborCount = countNeighbors(node, newArray, @adjacentDistance)
 
-      if neighborCount is 0
+      if neighborCount is 1
         if Math.random() < 0.10
           node.alive = false
 
-      if neighborCount > 2
+      if neighborCount > 3
           node.alive = false
 
     index = newArray.length - 1
