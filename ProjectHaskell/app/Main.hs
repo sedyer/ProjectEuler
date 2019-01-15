@@ -4,4 +4,4 @@ import Lib
 
 main :: IO ()
 
-main = someFunc
+main = putStrLn (show largestInGrid)
